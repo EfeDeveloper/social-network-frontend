@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { formatDistanceToNow } from 'date-fns';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -28,24 +29,6 @@ export function PostCard({ post }: PostCardProps) {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-
-    if (diffInHours < 1) return 'Hace menos de 1 hora';
-    if (diffInHours < 24) return `Hace ${diffInHours} hora${diffInHours > 1 ? 's' : ''}`;
-
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `Hace ${diffInDays} día${diffInDays > 1 ? 's' : ''}`;
-
-    return date.toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
   return (
     <Card className="w-full">
       <CardHeader className="pb-3">
@@ -63,7 +46,7 @@ export function PostCard({ post }: PostCardProps) {
 
           <div className="flex-1">
             <p className="font-semibold text-sm">{post.user.firstName}</p>
-            <p className="text-muted-foreground text-xs">{formatDate(post.createdAt)}</p>
+            <p className="text-muted-foreground text-xs">{formatDistanceToNow(post.createdAt)}</p>
           </div>
         </div>
       </CardHeader>
@@ -77,9 +60,12 @@ export function PostCard({ post }: PostCardProps) {
             size="sm"
             onClick={handleLike}
             disabled={isLiking}
-            className={cn('h-8 px-2 text-xs', post.isLiked && 'text-red-500 hover:text-red-600')}
+            className={cn(
+              'h-8 px-2 text-xs',
+              post.likedByCurrentUser && 'text-red-500 hover:text-red-600'
+            )}
           >
-            <Heart className={cn('h-4 w-4 mr-1', post.isLiked && 'fill-current')} />
+            <Heart className={cn('h-4 w-4 mr-1', post.likedByCurrentUser && 'fill-current')} />
             {post.likesCount} {post.likesCount === 1 ? 'Like' : 'Likes'}
           </Button>
         </div>
