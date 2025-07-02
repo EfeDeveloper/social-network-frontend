@@ -17,9 +17,10 @@ import { Loader2, User, Mail, Calendar, Edit } from 'lucide-react';
 
 export default function ProfilePage() {
   const { user, updateProfile, isLoading, error, clearError } = useAuthStore();
+  console.log('🚀  -- user:', user);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    name: user?.firstName ?? '',
+    firstName: user?.firstName ?? '',
     lastName: user?.lastName ?? '',
   });
 
@@ -33,7 +34,7 @@ export default function ProfilePage() {
 
   const handleCancel = () => {
     setFormData({
-      name: user?.firstName ?? '',
+      firstName: user?.firstName ?? '',
       lastName: user?.lastName ?? '',
     });
     setIsEditing(false);
@@ -88,7 +89,9 @@ export default function ProfilePage() {
                         <User className="w-5 h-5 text-muted-foreground" />
                         <div>
                           <Label className="font-medium text-sm">Name</Label>
-                          <p className="text-muted-foreground text-sm">{user?.firstName}</p>
+                          <p className="text-muted-foreground text-sm">
+                            {`${user?.firstName} ${user?.lastName}`}
+                          </p>
                         </div>
                       </div>
 
@@ -119,11 +122,11 @@ export default function ProfilePage() {
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
+                      <Label htmlFor="firstName">Name</Label>
                       <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        id="firstName"
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         required
                         disabled={isLoading}
                       />
@@ -143,7 +146,7 @@ export default function ProfilePage() {
                     <div className="flex space-x-2">
                       <Button
                         type="submit"
-                        disabled={isLoading || !formData.name.trim()}
+                        disabled={isLoading || !formData.firstName.trim()}
                         className="flex-1"
                       >
                         {isLoading ? (

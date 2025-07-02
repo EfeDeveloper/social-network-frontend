@@ -16,6 +16,12 @@ export interface Post {
   createdAt: string;
 }
 
+export interface LikedPost {
+  id: string;
+  liked: boolean;
+  likesCount: number;
+}
+
 export interface AuthState {
   user: User | null;
   token: string | null;

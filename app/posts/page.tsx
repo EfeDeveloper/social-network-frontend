@@ -31,16 +31,14 @@ export default function PostsPage() {
           <div className="mx-auto max-w-2xl">
             <div className="flex justify-between items-center mb-8">
               <div>
-                <h1 className="font-bold text-3xl">Publicaciones</h1>
-                <p className="text-muted-foreground">
-                  Descubre lo que está compartiendo la comunidad
-                </p>
+                <h1 className="font-bold text-3xl">Post</h1>
+                <p className="text-muted-foreground">Discover what the community is sharing</p>
               </div>
 
               <Button asChild>
                 <Link href="/create-post">
                   <PlusCircle className="mr-2 w-4 h-4" />
-                  Nueva Publicación
+                  New post
                 </Link>
               </Button>
             </div>
@@ -79,12 +77,12 @@ export default function PostsPage() {
                 <div className="mx-auto mb-4 w-12 h-12 text-muted-foreground">
                   <PlusCircle className="w-full h-full" />
                 </div>
-                <h3 className="mb-2 font-semibold text-lg">No hay publicaciones</h3>
+                <h3 className="mb-2 font-semibold text-lg">There are no post</h3>
                 <p className="mb-4 text-muted-foreground">
-                  ¡Sé el primero en compartir algo con la comunidad!
+                  Be the first to share something with the community!
                 </p>
                 <Button asChild>
-                  <Link href="/create-post">Crear primera publicación</Link>
+                  <Link href="/create-post">Create first post</Link>
                 </Button>
               </div>
             ) : (
