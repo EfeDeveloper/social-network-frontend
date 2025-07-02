@@ -25,12 +25,8 @@ export default function CreatePostPage() {
 
     if (!message.trim()) return;
 
-    try {
-      await createPost(message.trim());
-      router.push('/posts');
-    } catch (error) {
-      // Error manejado por el store
-    }
+    await createPost(message.trim());
+    router.push('/posts');
   };
 
   const characterCount = message.length;
@@ -48,15 +44,15 @@ export default function CreatePostPage() {
               <Button variant="ghost" asChild className="mb-4">
                 <Link href="/posts">
                   <ArrowLeft className="mr-2 w-4 h-4" />
-                  Volver a publicaciones
+                  Return to pots
                 </Link>
               </Button>
             </div>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl">Nueva Publicación</CardTitle>
-                <CardDescription>Comparte tus pensamientos con la comunidad</CardDescription>
+                <CardTitle className="text-2xl">New post</CardTitle>
+                <CardDescription>Share your thoughts with the community</CardDescription>
               </CardHeader>
 
               <CardContent>
@@ -68,10 +64,10 @@ export default function CreatePostPage() {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Mensaje</Label>
+                    <Label htmlFor="message">Message</Label>
                     <Textarea
                       id="message"
-                      placeholder="¿Qué está pasando?"
+                      placeholder="¿What's happening?"
                       value={message}
                       onChange={(e) => {
                         setMessage(e.target.value);
@@ -86,12 +82,12 @@ export default function CreatePostPage() {
                       <span
                         className={`${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}
                       >
-                        {characterCount}/{maxCharacters} caracteres
+                        {characterCount}/{maxCharacters} Characters
                       </span>
 
                       {isOverLimit && (
                         <span className="text-destructive text-xs">
-                          Excede el límite de caracteres
+                          Exceeds the characters limit
                         </span>
                       )}
                     </div>
@@ -106,12 +102,12 @@ export default function CreatePostPage() {
                       {isLoading ? (
                         <>
                           <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                          Publicando...
+                          Publishing ...
                         </>
                       ) : (
                         <>
                           <Send className="mr-2 w-4 h-4" />
-                          Publicar
+                          Post
                         </>
                       )}
                     </Button>
@@ -122,7 +118,7 @@ export default function CreatePostPage() {
                       onClick={() => router.push('/posts')}
                       disabled={isLoading}
                     >
-                      Cancelar
+                      Cancel
                     </Button>
                   </div>
                 </form>
