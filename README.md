@@ -1,4 +1,4 @@
-🧑‍💻 Social Network App — Modern Social Media SPA
+# 🧑‍💻 Social Network App — Modern Social Media SPA
 
 A modular, scalable, and maintainable social network Single Page Application (SPA) built with **Next.js 15 + React 19 + TypeScript + Zustand + Tailwind CSS**, following best practices of scalable architecture, maintainable code, and a high-quality user experience.
 
